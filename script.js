@@ -1,25 +1,26 @@
-function display_time()
-{
-    var time = new Date();
-    var hr = time.getHours();
-    var min = time.getMinutes();
-    var sec = time.getSeconds();
-    var AM = document.getElementById('AM');
+function currentTime() {
 
-    if(hr >=12){
-        AM.innerHTML = 'PM';
+    let date = new Date();
+    let hh = date.getHours();
+    let mm = date.getMinutes();
+    let ss = date.getSeconds();
+    let session = "AM";
+
+    if (hh == 0) {
+        hh = 12;
     }
-    else{
-        AM.innerHTML = 'AM';
+    if (hh > 12) {
+        hh = hh - 12;
+        session = "PM";
     }
 
-    document.getElementById('hours').innerHTML = hr;
-    document.getElementById('minutes').innerHTML = min;
-    document.getElementById('seconds').innerHTML = sec;
-    
+    hh = (hh < 10) ? "0" + hh : hh;
+    mm = (mm < 10) ? "0" + mm : mm;
+    ss = (ss < 10) ? "0" + ss : ss;
+
+    let time = hh + ":" + mm + ":" + ss + " " + session;
+
+    document.getElementById("main").innerText = time;
+    let t = setTimeout(function () { currentTime() }, 1000);
 }
-
-setInterval(display_time, 1000);
-
-
-
+currentTime();    
